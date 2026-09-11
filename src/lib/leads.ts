@@ -17,6 +17,7 @@ export interface DemoLead {
   institutionType: "k-12" | "higher-ed" | "multi-campus" | "international" | "other";
   studentCount: string;
   role: string;
+  interests?: string[];
   attribution?: LeadAttribution;
 }
 

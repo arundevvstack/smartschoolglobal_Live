@@ -20,7 +20,7 @@ export function FeatureLayout({ icon, category, title, description, productPrevi
       {/* Hero & Product Preview Split */}
       <section className="pt-24 pb-16 bg-surface border-b overflow-hidden relative">
         <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] opacity-50"></div>
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="relative mx-auto max-w-[90rem] px-4 sm:px-6 lg:px-8">
           <div className="lg:grid lg:grid-cols-12 lg:gap-16 items-center">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
@@ -52,7 +52,7 @@ export function FeatureLayout({ icon, category, title, description, productPrevi
 
       {/* Workflow Section */}
       <section className="py-24 bg-background">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-[90rem] px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-xs font-bold text-brand-600 uppercase tracking-widest mb-2">How it works</h2>
             <p className="text-3xl font-bold text-foreground">Intelligent Workflow</p>
@@ -63,7 +63,7 @@ export function FeatureLayout({ icon, category, title, description, productPrevi
 
       {/* Benefits */}
       <section className="py-24 bg-surface border-t border-border">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-[90rem] px-4 sm:px-6 lg:px-8">
           {benefits}
         </div>
       </section>

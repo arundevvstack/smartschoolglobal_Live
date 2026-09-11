@@ -64,7 +64,7 @@ const metrics = [
 export function TrustSection() {
   return (
     <section className="py-16 lg:py-24 bg-white overflow-hidden relative">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="mx-auto max-w-[90rem] px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Top Half: Title & Grid */}
         <div className="flex flex-col lg:grid lg:grid-cols-12 gap-12 lg:gap-8 items-start mb-16">

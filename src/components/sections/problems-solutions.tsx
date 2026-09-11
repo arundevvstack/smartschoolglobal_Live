@@ -3,7 +3,7 @@
 import * as React from "react"
 import { motion, AnimatePresence, useScroll, useTransform, useSpring, useReducedMotion, useMotionValueEvent } from "framer-motion"
 import Link from "next/link"
-import { ArrowRight, LayoutDashboard, CheckCircle2, Clock, TrendingUp } from "lucide-react"
+import { ArrowRight, LayoutDashboard, CheckCircle2, Clock, TrendingUp, BookOpen } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -44,6 +44,20 @@ const CHAPTERS = [
     scatteredElements: ["Late Payments", "Missing Invoices", "Manual Follow-ups", "Cash Flow Gaps"],
     outcomeMetric: "94% average fee collection rate",
     outcomeSubtext: "Automated digital financial operations",
+  },
+  {
+    id: "gradebook-chaos",
+    number: "03",
+    title: (
+      <>
+        Gradebook <br className="hidden lg:block" />
+        <span className="text-blue-400">Chaos</span>
+      </>
+    ),
+    description: "Teachers spend countless hours manually calculating grades, building report cards, and aligning with complex curriculum standards like IB or IGCSE.",
+    scatteredElements: ["Manual Calculation", "Format Errors", "Curriculum Misalignment", "Late Report Cards"],
+    outcomeMetric: "100% automated grading pipelines",
+    outcomeSubtext: "Instant report card generation",
   }
 ]
 
@@ -82,12 +96,15 @@ function ProductTransformation({ activeChapter }: { activeChapter: number }) {
               const radius = 140
               const x = Math.cos(angle) * radius
               const y = Math.sin(angle) * radius
+              // Deterministic pseudo-random rotation based on index to prevent SSR hydration errors
+              const initialRotate = (i * 47) % 20 - 10;
+              const animateRotate = (i * 31) % 10 - 5;
               
               return (
                 <motion.div
                   key={el}
-                  initial={{ opacity: 0, x: x * 1.5, y: y * 1.5, rotate: Math.random() * 20 - 10 }}
-                  animate={{ opacity: 1, x, y, rotate: Math.random() * 10 - 5 }}
+                  initial={{ opacity: 0, x: x * 1.5, y: y * 1.5, rotate: initialRotate }}
+                  animate={{ opacity: 1, x, y, rotate: animateRotate }}
                   exit={{ x: 0, y: 0, opacity: 0, scale: 0.5 }}
                   transition={{ duration: 0.8, type: "spring", bounce: 0.3 }}
                   className="absolute px-4 py-2 bg-slate-800/80 backdrop-blur-md border border-red-500/30 text-red-200 text-xs font-bold rounded-lg shadow-xl"
@@ -131,7 +148,7 @@ function ProductTransformation({ activeChapter }: { activeChapter: number }) {
               </div>
 
               <div className="p-6 space-y-6">
-                {activeChapter === 0 ? (
+                {activeChapter === 0 && (
                   <>
                     <div className="flex items-center gap-3 mb-6">
                       <div className="p-2 rounded-lg bg-blue-500/10 text-blue-400">
@@ -146,13 +163,15 @@ function ProductTransformation({ activeChapter }: { activeChapter: number }) {
                       <MetricCard title="Time Saved" value="3.5 hrs" trend="Per teacher/wk" trendUp={true} delay={0.1} />
                       <MetricCard title="System" value="Active" trend="Logs & reports" trendUp={true} delay={0.2} />
                     </div>
-                    <div className="bg-[#1e293b]/50 rounded-xl border border-white/5 p-3">
+                    <div className="bg-[#1e293b]/50 rounded-xl border border-white/5 p-3 mt-3">
                       <h4 className="text-[10px] uppercase tracking-wider text-slate-500 font-bold mb-3">Automated Background Tasks</h4>
                       <DataTableRow delay={0.3} columns={[<span key="1" className="text-xs text-slate-300">Attendance Syncing</span>, <StatusBadge key="2" status="success" label="Synced" />]} />
                       <DataTableRow delay={0.4} columns={[<span key="1" className="text-xs text-slate-300">Parent Notifications</span>, <StatusBadge key="2" status="success" label="Sent" />]} />
                     </div>
                   </>
-                ) : (
+                )}
+                
+                {activeChapter === 1 && (
                   <>
                     <div className="flex items-center gap-3 mb-6">
                       <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-400">
@@ -173,6 +192,28 @@ function ProductTransformation({ activeChapter }: { activeChapter: number }) {
                     <div className="bg-[#1e293b]/50 rounded-xl border border-white/5 p-3 mt-3">
                       <DataTableRow delay={0.3} columns={[<span key="1" className="text-xs font-mono text-slate-300">INV-2024-101</span>, <StatusBadge key="2" status="success" label="Paid" />]} />
                       <DataTableRow delay={0.4} columns={[<span key="1" className="text-xs font-mono text-slate-300">INV-2024-102</span>, <StatusBadge key="2" status="warning" label="Pending" />]} />
+                    </div>
+                  </>
+                )}
+
+                {activeChapter === 2 && (
+                  <>
+                    <div className="flex items-center gap-3 mb-6">
+                      <div className="p-2 rounded-lg bg-purple-500/10 text-purple-400">
+                        <BookOpen className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <h3 className="text-base font-bold text-white">Academic Performance</h3>
+                        <p className="text-xs text-slate-400">Automated grading & reports</p>
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-2 gap-3">
+                      <MetricCard title="Report Cards" value="Generated" trend="Zero manual entry" trendUp={true} delay={0.1} />
+                      <MetricCard title="Curriculum" value="Aligned" trend="IB & IGCSE ready" trendUp={true} delay={0.2} />
+                    </div>
+                    <div className="bg-[#1e293b]/50 rounded-xl border border-white/5 p-3 mt-3">
+                      <DataTableRow delay={0.3} columns={[<span key="1" className="text-xs text-slate-300">Grade 10 Mathematics</span>, <StatusBadge key="2" status="success" label="Calculated" />]} />
+                      <DataTableRow delay={0.4} columns={[<span key="1" className="text-xs text-slate-300">Term 1 Report Cards</span>, <StatusBadge key="2" status="success" label="Published" />]} />
                     </div>
                   </>
                 )}
@@ -203,9 +244,10 @@ export function ProblemsSolutions() {
 
   // Calculate Active Chapter based on scroll
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    // 0.0 - 0.5: Ch 0
-    // 0.5 - 1.0: Ch 1
-    let chapter = latest < 0.5 ? 0 : 1
+    // 0.0 - 0.33: Ch 0
+    // 0.33 - 0.66: Ch 1
+    // 0.66 - 1.0: Ch 2
+    let chapter = latest < 0.33 ? 0 : latest < 0.66 ? 1 : 2
     if (chapter !== activeChapter) {
       setActiveChapter(chapter)
     }
@@ -240,12 +282,12 @@ export function ProblemsSolutions() {
   }
 
   return (
-    // 150vh container creates a snappier scroll distance
-    <section ref={containerRef} className="relative h-[150vh] bg-[#0A192F]">
+    // 200vh container creates a snappier scroll distance for 3 chapters
+    <section ref={containerRef} className="relative h-[200vh] bg-[#0A192F]">
       
       {/* Sticky viewport locks content while scrolling down the 150vh container */}
       <div 
-        className="sticky top-0 h-[100svh] overflow-hidden flex flex-col justify-center pt-20"
+        className="sticky top-0 min-h-[100svh] h-auto lg:h-[100svh] overflow-hidden flex flex-col justify-center pt-24 pb-12 lg:pt-20 lg:pb-0"
         onMouseMove={handleMouseMove}
       >
         
@@ -282,7 +324,7 @@ export function ProblemsSolutions() {
         </div>
 
         {/* Main Content Grid */}
-        <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 pl-8 lg:pl-32">
+        <div className="relative z-10 mx-auto w-full max-w-[90rem] px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:grid lg:grid-cols-12 lg:gap-16 items-center">
             
             {/* LEFT SIDE: Morphing Story Content */}
@@ -355,8 +397,10 @@ export function ProblemsSolutions() {
         </div>
 
         {/* Mobile Product Fallback (No 3D, static layout underneath) */}
-        <div className="block lg:hidden relative z-10 w-full px-4 mt-4 pb-12">
-          <ProductTransformation activeChapter={activeChapter} />
+        <div className="flex lg:hidden relative z-10 w-full px-4 mt-8">
+          <div className="scale-90 sm:scale-100 origin-top w-full">
+            <ProductTransformation activeChapter={activeChapter} />
+          </div>
         </div>
         
         {/* Scroll Indicator */}

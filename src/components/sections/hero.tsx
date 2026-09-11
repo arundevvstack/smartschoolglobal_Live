@@ -29,6 +29,7 @@ const CHAPTERS = [
     primaryCta: "Book a Demo",
     primaryHref: "/book-demo",
     secondaryCta: "Explore Platform",
+    secondaryHref: "/features",
     dashboardTab: "overview",
     rotation: { x: 12, y: -8, z: 0, scale: 0.95 },
   },
@@ -90,6 +91,7 @@ const CHAPTERS = [
     primaryCta: "Book a Demo",
     primaryHref: "/book-demo",
     secondaryCta: "Contact Sales",
+    secondaryHref: "/contact-sales",
     dashboardTab: "overview",
     rotation: { x: 0, y: 0, z: 0, scale: 1.05 },
   }
@@ -133,7 +135,7 @@ function ScrollStoryContent({ activeChapter }: { activeChapter: number }) {
             </Button>
             {chapter.secondaryCta && (
               <Button size="lg" variant="outline" className="h-14 px-6 sm:px-8 text-base bg-white/5 text-white border-white/20 hover:bg-white/10 w-full sm:w-auto shadow-sm transition-colors" asChild>
-                <Link href="/features">
+                <Link href={chapter.secondaryHref || "/features"}>
                   {chapter.secondaryCta}
                 </Link>
               </Button>
@@ -244,7 +246,7 @@ function ScrollStoryProduct({ activeChapter, mouseX, mouseY }: { activeChapter: 
           </motion.div>
 
           {/* Dashboard Core */}
-          <DashboardPreview className="w-full min-h-[420px] shadow-2xl shadow-black/50 border-white/10 bg-[#0f172a] transform translate-z-0">
+          <DashboardPreview className="w-full min-h-[280px] sm:min-h-[420px] shadow-2xl shadow-black/50 border-white/10 bg-[#0f172a] transform translate-z-0">
             <AnimatePresence mode="wait">
               <motion.div
                 key={chapter.dashboardTab}
@@ -454,7 +456,7 @@ export function Hero() {
       
       {/* Sticky viewport locks content while scrolling down the 250vh container */}
       <div 
-        className="sticky top-0 h-[100svh] overflow-hidden flex flex-col justify-center pt-16"
+        className="sticky top-0 min-h-[100svh] h-auto lg:h-[100svh] overflow-hidden flex flex-col justify-center pt-24 pb-12 lg:pt-16 lg:pb-0"
         onMouseMove={handleMouseMove}
       >
         
@@ -466,7 +468,7 @@ export function Hero() {
         <ScrollStoryProgress activeChapter={activeChapter} onDotClick={handleDotClick} />
 
         {/* Main Content Grid */}
-        <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 pl-8 lg:pl-20">
+        <div className="relative mx-auto w-full max-w-[90rem] px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:grid lg:grid-cols-12 lg:gap-16 items-center">
             
             {/* LEFT SIDE: Story Content */}
@@ -483,8 +485,10 @@ export function Hero() {
         </div>
 
         {/* Mobile Product Fallback (No 3D, static underneath) */}
-        <div className="block sm:hidden relative z-10 w-full px-4 mt-8 pb-12">
-          <ScrollStoryProduct activeChapter={activeChapter} mouseX={0} mouseY={0} />
+        <div className="flex lg:hidden relative z-10 w-full px-4 mt-8">
+          <div className="scale-90 sm:scale-100 origin-top w-full">
+            <ScrollStoryProduct activeChapter={activeChapter} mouseX={0} mouseY={0} />
+          </div>
         </div>
         
         {/* Scroll Indicator */}

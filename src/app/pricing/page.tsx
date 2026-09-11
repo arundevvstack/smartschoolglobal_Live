@@ -15,7 +15,7 @@ export default function PricingPage() {
       {/* Hero */}
       <section className="pt-24 pb-16 bg-brand-900 text-white relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center opacity-10"></div>
-        <div className="relative mx-auto max-w-7xl px-6 lg:px-8 text-center">
+        <div className="relative mx-auto max-w-[90rem] px-6 lg:px-8 text-center">
           <h1 className="text-4xl font-bold tracking-tight sm:text-5xl mb-6">
             Enterprise Pricing, Tailored to Your Scale
           </h1>
@@ -27,7 +27,7 @@ export default function PricingPage() {
 
       {/* Inquiry Section */}
       <section className="py-24 bg-gray-50 -mt-10">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="mx-auto max-w-[90rem] px-6 lg:px-8">
           <div className="grid lg:grid-cols-12 gap-8 lg:gap-16 items-start max-w-5xl mx-auto">
             
             <div className="lg:col-span-7">

@@ -87,7 +87,7 @@ export default function ProductTourPage() {
     <div className="bg-white min-h-screen">
       {/* Hero */}
       <section className="pt-24 pb-16 bg-gray-900 text-white border-b">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center">
+        <div className="mx-auto max-w-[90rem] px-6 lg:px-8 text-center">
           <div className="max-w-3xl mx-auto">
             <h1 className="text-4xl font-bold tracking-tight sm:text-5xl mb-6">
               Interactive Product Tour
@@ -101,7 +101,7 @@ export default function ProductTourPage() {
 
       {/* Interactive Tour */}
       <section className="py-24 bg-gray-50">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="mx-auto max-w-[90rem] px-6 lg:px-8">
           <div className="grid lg:grid-cols-12 gap-12 items-center">
             
             <div className="lg:col-span-5 space-y-4">
@@ -169,7 +169,7 @@ export default function ProductTourPage() {
 
       {/* Action */}
       <section className="py-24 bg-white border-t">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center">
+        <div className="mx-auto max-w-[90rem] px-6 lg:px-8 text-center">
           <ShieldCheck className="h-12 w-12 text-brand-500 mx-auto mb-6" />
           <h2 className="text-3xl font-bold text-gray-900 mb-6">Ready to see it in your environment?</h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">

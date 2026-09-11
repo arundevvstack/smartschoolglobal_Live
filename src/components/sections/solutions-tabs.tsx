@@ -66,13 +66,13 @@ export function SolutionsTabs() {
   }
 
   return (
-    <section className="relative py-16 lg:py-24 bg-slate-950 overflow-hidden min-h-[100svh] flex flex-col justify-center">
+    <section className="relative py-16 lg:py-24 bg-slate-950 overflow-hidden min-h-[100svh] flex flex-col justify-center border-t border-slate-900">
       
       {/* Immersive Background Glows */}
       <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center opacity-5 [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"></div>
       <div className="absolute top-1/2 start-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-600/10 rounded-full blur-[120px] pointer-events-none -z-10"></div>
 
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full z-10">
+      <div className="relative mx-auto max-w-[90rem] px-4 sm:px-6 lg:px-8 w-full z-10">
         <div className="mx-auto max-w-3xl lg:text-center mb-12 lg:mb-16">
           <h2 className="text-sm font-bold leading-7 text-blue-400 uppercase tracking-widest">Purpose-Built</h2>
           <p className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">

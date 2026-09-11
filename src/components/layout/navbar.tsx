@@ -5,7 +5,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
-import { Menu, X, ChevronDown } from "lucide-react"
+import { Menu, X, ChevronDown, Building2, Globe2, Network, ArrowRight } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
@@ -16,15 +16,33 @@ const navigation = [
     name: "Solutions", 
     href: "/solutions",
     dropdown: [
-      { name: "Independent Schools", href: "/solutions/independent", description: "Complete management for independent institutions" },
-      { name: "International Schools", href: "/solutions/international", description: "Built for IB, IGCSE & Global Curricula" },
-      { name: "Group of Schools", href: "/solutions/group", description: "Centralised control for multi-campus networks" },
+      { 
+        name: "Independent Schools", 
+        href: "/solutions/independent", 
+        description: "Complete management for independent institutions",
+        icon: Building2,
+        color: "text-blue-500",
+        bg: "bg-blue-50"
+      },
+      { 
+        name: "International Schools", 
+        href: "/solutions/international", 
+        description: "Built for IB, IGCSE & Global Curricula",
+        icon: Globe2,
+        color: "text-indigo-500",
+        bg: "bg-indigo-50"
+      },
+      { 
+        name: "Group of Schools", 
+        href: "/solutions/group", 
+        description: "Centralised control for multi-campus networks",
+        icon: Network,
+        color: "text-purple-500",
+        bg: "bg-purple-50"
+      },
     ]
   },
-  { 
-    name: "Features", 
-    href: "/features"
-  },
+  { name: "Features", href: "/features" },
   { name: "Case Studies", href: "/case-studies" },
   { name: "Blog", href: "/blog" },
   { name: "About", href: "/about" },
@@ -68,7 +86,6 @@ export function Navbar() {
       document.body.style.overflow = "hidden"
     } else {
       document.body.style.overflow = ""
-      // Reset mobile accordion when main menu closes
       setMobileActiveDropdown(null)
     }
     return () => {
@@ -113,7 +130,7 @@ export function Navbar() {
     if (timeoutRef.current) clearTimeout(timeoutRef.current)
     timeoutRef.current = setTimeout(() => {
       setActiveDropdown(null)
-    }, 150) // 150ms bridge delay
+    }, 150)
   }
 
   // ----------------------------------------------------
@@ -131,17 +148,28 @@ export function Navbar() {
     <header
       ref={navRef}
       className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-all duration-300 border-b",
+        "fixed inset-x-0 top-0 z-50 transition-all duration-500 border-b",
         isScrolled
-          ? "bg-white border-blue-900/10 shadow-sm"
+          ? "bg-white/95 backdrop-blur-md border-blue-900/10 shadow-[0_8px_30px_rgb(0,0,0,0.04)]"
           : "bg-white border-transparent"
       )}
     >
-      <nav className="mx-auto flex h-28 lg:h-32 max-w-7xl items-center justify-between px-4 lg:px-8" aria-label="Global">
+      <nav className={cn(
+        "mx-auto flex max-w-[90rem] items-center justify-between px-4 sm:px-6 lg:px-8 transition-all duration-500",
+        isScrolled ? "h-20" : "h-28"
+      )} aria-label="Global">
+        
         <div className="flex lg:flex-1">
-          <Link href="/" className="-m-1.5 p-1.5 flex items-center gap-2">
+          <Link href="/" className="-m-1.5 p-1.5 flex items-center gap-2 group">
             <span className="sr-only">Smart School AI</span>
-            <Image src="/logo.png" alt="Smart School AI" width={300} height={96} className="h-24 w-auto object-contain" priority />
+            <Image 
+              src="/smart-school-logo.png" 
+              alt="Smart School AI" 
+              width={400} 
+              height={120} 
+              className="h-10 md:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105 origin-left" 
+              priority 
+            />
           </Link>
         </div>
         
@@ -149,26 +177,39 @@ export function Navbar() {
         <div className="flex lg:hidden">
           <button
             type="button"
-            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-blue-950"
+            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-blue-950 hover:bg-slate-100 transition-colors"
             onClick={() => setMobileMenuOpen(true)}
             aria-expanded={mobileMenuOpen}
-            aria-controls="mobile-menu"
           >
             <span className="sr-only">Open main menu</span>
-            <Menu className="h-6 w-6" aria-hidden="true" />
+            <Menu className="h-7 w-7" aria-hidden="true" />
           </button>
         </div>
 
         {/* Desktop Navigation */}
-        <div className="hidden lg:flex lg:gap-x-8 h-full items-center">
+        <div className="hidden lg:flex lg:gap-x-10 h-full items-center">
           {navigation.map((item) => {
             const isActive = pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
             const isDropdownOpen = activeDropdown === item.name;
 
+            const baseLinkStyles = cn(
+              "relative flex items-center gap-x-1.5 text-base font-bold tracking-wide transition-colors h-full px-2",
+              isActive ? "text-blue-600" : "text-slate-600 hover:text-blue-600",
+              isDropdownOpen && "text-blue-600"
+            )
+
+            const animatedUnderline = (
+              <span className={cn(
+                "absolute bottom-[35%] left-0 h-[3px] w-full bg-blue-600 rounded-full transition-all duration-300 origin-left",
+                isActive ? "scale-x-100" : "scale-x-0 opacity-0 group-hover:scale-x-100 group-hover:opacity-100",
+                isDropdownOpen && "scale-x-100 opacity-100"
+              )} />
+            )
+
             return (
             <div 
               key={item.name} 
-              className="relative flex items-center h-full"
+              className="relative flex items-center h-full group"
               onMouseEnter={() => item.dropdown && handleMouseEnter(item.name)}
               onMouseLeave={handleMouseLeave}
             >
@@ -176,60 +217,67 @@ export function Navbar() {
                 <button
                   onClick={() => handleDesktopClickToggle(item.name)}
                   aria-expanded={isDropdownOpen}
-                  className={cn(
-                    "flex items-center gap-x-1 text-sm font-semibold leading-6 transition-colors h-full border-b-2 pt-[2px]",
-                    isActive ? "text-blue-600 border-blue-600" : "text-blue-950 border-transparent hover:text-blue-600",
-                    isDropdownOpen && "text-blue-600"
-                  )}
+                  className={baseLinkStyles}
                 >
                   {item.name}
-                  <ChevronDown className={cn("h-4 w-4 transition-transform", isDropdownOpen && "rotate-180")} aria-hidden="true" />
+                  <ChevronDown className={cn("h-4 w-4 transition-transform duration-300", isDropdownOpen && "rotate-180 text-blue-600")} aria-hidden="true" />
+                  {animatedUnderline}
                 </button>
               ) : (
                 <Link
                   href={item.href}
-                  className={cn(
-                    "flex items-center text-sm font-semibold leading-6 transition-colors h-full border-b-2 pt-[2px]",
-                    isActive ? "text-blue-600 border-blue-600" : "text-blue-950 border-transparent hover:text-blue-600"
-                  )}
+                  className={baseLinkStyles}
                 >
                   {item.name}
+                  {animatedUnderline}
                 </Link>
               )}
 
-              {/* Desktop Submenu Dropdown */}
+              {/* Desktop Submenu Dropdown (Mega Menu Style) */}
               {item.dropdown && (
                 <AnimatePresence>
                   {isDropdownOpen && (
                     <motion.div
-                      initial={{ opacity: 0, y: 4 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 4 }}
-                      transition={{ duration: 0.15, ease: "easeOut" }}
-                      // The top-[calc(100%-10px)] ensures the invisible hover bridge is covered cleanly
-                      className="absolute top-full start-1/2 -translate-x-1/2 pt-2"
+                      initial={{ opacity: 0, y: 15, scale: 0.95 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                      transition={{ duration: 0.2, ease: "easeOut" }}
+                      className="absolute top-[calc(100%-25px)] start-1/2 -translate-x-1/2 pt-4"
                     >
-                      <div className="w-screen max-w-md overflow-hidden rounded-xl shadow-xl ring-1 ring-black ring-opacity-5">
-                        <div className="relative grid gap-2 bg-white px-5 py-6 sm:gap-4 sm:p-6 border border-blue-900/5 rounded-xl">
-                          {item.dropdown.map((subItem) => (
-                            <Link
-                              key={subItem.name}
-                              href={subItem.href}
-                              className="-m-2 flex items-start rounded-lg p-3 hover:bg-blue-50 transition-colors group"
-                              onClick={() => setActiveDropdown(null)}
-                            >
-                              <div className="ms-2">
-                                <p className="text-sm font-semibold text-blue-950 group-hover:text-blue-600 transition-colors">
-                                  {subItem.name}
-                                </p>
-                                {('description' in subItem) && (
-                                  <p className="mt-1 text-xs text-slate-500">
-                                    {(subItem as any).description}
+                      <div className="w-screen max-w-[500px] overflow-hidden rounded-2xl shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] ring-1 ring-slate-200 bg-white">
+                        <div className="relative grid gap-2 p-4">
+                          {item.dropdown.map((subItem: any) => {
+                            const Icon = subItem.icon
+                            return (
+                              <Link
+                                key={subItem.name}
+                                href={subItem.href}
+                                className="flex items-start gap-4 rounded-xl p-4 hover:bg-slate-50 transition-all duration-200 group/item"
+                                onClick={() => setActiveDropdown(null)}
+                              >
+                                <div className={cn("p-3 rounded-lg shrink-0 transition-colors", subItem.bg)}>
+                                  <Icon className={cn("w-6 h-6", subItem.color)} />
+                                </div>
+                                <div className="flex-1">
+                                  <div className="flex items-center justify-between">
+                                    <p className="text-base font-bold text-slate-900 group-hover/item:text-blue-600 transition-colors">
+                                      {subItem.name}
+                                    </p>
+                                    <ArrowRight className="w-4 h-4 text-blue-600 opacity-0 -translate-x-2 transition-all duration-300 group-hover/item:opacity-100 group-hover/item:translate-x-0" />
+                                  </div>
+                                  <p className="mt-1 text-sm text-slate-500 font-medium leading-snug">
+                                    {subItem.description}
                                   </p>
-                                )}
-                              </div>
-                            </Link>
-                          ))}
+                                </div>
+                              </Link>
+                            )
+                          })}
+                        </div>
+                        <div className="bg-slate-50 p-4 border-t border-slate-100">
+                          <Link href="/solutions" className="flex items-center justify-center gap-2 text-sm font-bold text-blue-600 hover:text-blue-700 transition-colors" onClick={() => setActiveDropdown(null)}>
+                            View all solutions
+                            <ArrowRight className="w-4 h-4" />
+                          </Link>
                         </div>
                       </div>
                     </motion.div>
@@ -240,11 +288,11 @@ export function Navbar() {
           )})}
         </div>
 
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end gap-4 items-center">
-          <Button variant="outline" className="bg-white text-blue-950 border-blue-200 hover:bg-blue-50 hover:text-blue-700 transition-colors shadow-sm" asChild>
-            <Link href="/book-demo">Contact Sales</Link>
+        <div className="hidden lg:flex lg:flex-1 lg:justify-end gap-5 items-center">
+          <Button variant="ghost" className="text-base font-bold text-slate-600 hover:text-blue-600 hover:bg-blue-50 transition-colors h-12 px-6 rounded-full" asChild>
+            <Link href="/contact-sales">Contact Sales</Link>
           </Button>
-          <Button className="bg-blue-600 text-white hover:bg-blue-500 shadow-sm transition-colors" asChild>
+          <Button className="bg-blue-600 text-white hover:bg-blue-700 shadow-lg shadow-blue-600/20 transition-all hover:-translate-y-0.5 h-12 px-8 text-base font-bold rounded-full" asChild>
             <Link href="/book-demo">Book a Demo</Link>
           </Button>
         </div>
@@ -260,39 +308,35 @@ export function Navbar() {
             transition={{ duration: 0.2 }}
             className="lg:hidden"
           >
-            {/* Backdrop */}
             <div 
-              className="fixed inset-0 z-50 bg-gray-900/80 backdrop-blur-sm" 
+              className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm" 
               onClick={() => setMobileMenuOpen(false)} 
             />
             
-            {/* Slide-out Panel */}
             <motion.div
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", bounce: 0, duration: 0.4 }}
-              className="fixed inset-y-0 end-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10 shadow-2xl"
+              className="fixed inset-y-0 end-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-slate-900/10 shadow-2xl"
             >
-              <div className="flex items-center justify-between border-b border-blue-900/10 pb-4">
+              <div className="flex items-center justify-between border-b border-slate-100 pb-6">
                 <Link href="/" className="-m-1.5 p-1.5 flex items-center gap-2" onClick={() => setMobileMenuOpen(false)}>
                   <span className="sr-only">Smart School AI</span>
-                  <Image src="/logo.png" alt="Smart School AI" width={300} height={96} className="h-24 w-auto object-contain" priority />
+                  <Image src="/smart-school-logo.png" alt="Smart School AI" width={400} height={120} className="h-8 md:h-10 w-auto object-contain" priority />
                 </Link>
                 <button
                   type="button"
-                  className="-m-2.5 rounded-md p-2.5 text-blue-950 hover:bg-slate-100 transition-colors"
+                  className="-m-2.5 rounded-full p-2.5 text-slate-500 hover:bg-slate-100 hover:text-slate-900 transition-colors"
                   onClick={() => setMobileMenuOpen(false)}
-                  aria-expanded={mobileMenuOpen}
-                  aria-controls="mobile-menu"
                 >
                   <span className="sr-only">Close menu</span>
-                  <X className="h-6 w-6" aria-hidden="true" />
+                  <X className="h-7 w-7" aria-hidden="true" />
                 </button>
               </div>
               
-              <div className="mt-6 flow-root" id="mobile-menu">
-                <div className="-my-6 divide-y divide-blue-900/10">
+              <div className="mt-8 flow-root" id="mobile-menu">
+                <div className="-my-6 divide-y divide-slate-100">
                   <div className="space-y-2 py-6">
                     {navigation.map((item) => {
                       const isActive = pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
@@ -305,19 +349,19 @@ export function Navbar() {
                             onClick={() => handleMobileClickToggle(item.name)}
                             aria-expanded={isMobileDropdownOpen}
                             className={cn(
-                              "w-full flex items-center justify-between rounded-lg px-3 py-2 text-base font-semibold leading-7 transition-colors",
-                              isActive ? "text-blue-600 bg-blue-50" : "text-blue-950 hover:bg-blue-50 hover:text-blue-600"
+                              "w-full flex items-center justify-between rounded-xl px-4 py-3.5 text-lg font-bold transition-colors",
+                              isActive || isMobileDropdownOpen ? "text-blue-600 bg-blue-50/50" : "text-slate-700 hover:bg-slate-50"
                             )}
                           >
                             {item.name}
-                            <ChevronDown className={cn("h-5 w-5 transition-transform", isMobileDropdownOpen && "rotate-180")} aria-hidden="true" />
+                            <ChevronDown className={cn("h-5 w-5 transition-transform duration-300", isMobileDropdownOpen && "rotate-180 text-blue-600")} aria-hidden="true" />
                           </button>
                         ) : (
                           <Link
                             href={item.href}
                             className={cn(
-                              "-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 transition-colors",
-                              isActive ? "text-blue-600 bg-blue-50" : "text-blue-950 hover:bg-blue-50 hover:text-blue-600"
+                              "block rounded-xl px-4 py-3.5 text-lg font-bold transition-colors",
+                              isActive ? "text-blue-600 bg-blue-50/50" : "text-slate-700 hover:bg-slate-50"
                             )}
                             onClick={() => setMobileMenuOpen(false)}
                           >
@@ -336,17 +380,25 @@ export function Navbar() {
                                 transition={{ duration: 0.2 }}
                                 className="overflow-hidden"
                               >
-                                <div className="ps-4 mt-1 space-y-1 border-l-2 border-blue-100 ms-3 py-2">
-                                  {item.dropdown.map((subItem) => (
-                                    <Link
-                                      key={subItem.name}
-                                      href={subItem.href}
-                                      className="block rounded-lg px-3 py-2 text-sm font-medium text-slate-600 hover:bg-blue-50 hover:text-blue-600 transition-colors"
-                                      onClick={() => setMobileMenuOpen(false)}
-                                    >
-                                      {subItem.name}
-                                    </Link>
-                                  ))}
+                                <div className="mt-2 space-y-2 px-4 py-3 bg-slate-50 rounded-xl">
+                                  {item.dropdown.map((subItem: any) => {
+                                    const Icon = subItem.icon
+                                    return (
+                                      <Link
+                                        key={subItem.name}
+                                        href={subItem.href}
+                                        className="flex items-center gap-3 rounded-lg p-3 hover:bg-white transition-colors"
+                                        onClick={() => setMobileMenuOpen(false)}
+                                      >
+                                        <div className={cn("p-2 rounded-md shrink-0", subItem.bg)}>
+                                          <Icon className={cn("w-5 h-5", subItem.color)} />
+                                        </div>
+                                        <span className="text-base font-bold text-slate-700">
+                                          {subItem.name}
+                                        </span>
+                                      </Link>
+                                    )
+                                  })}
                                 </div>
                               </motion.div>
                             )}
@@ -355,11 +407,11 @@ export function Navbar() {
                       </div>
                     )})}
                   </div>
-                  <div className="py-6 flex flex-col gap-3">
-                    <Button variant="outline" className="w-full justify-center bg-white text-blue-950 border-blue-200 hover:bg-blue-50 shadow-sm transition-colors" asChild>
-                      <Link href="/book-demo" onClick={() => setMobileMenuOpen(false)}>Contact Sales</Link>
+                  <div className="py-8 flex flex-col gap-4">
+                    <Button variant="outline" className="w-full h-14 text-lg font-bold text-slate-700 rounded-xl border-slate-200" asChild>
+                      <Link href="/contact-sales" onClick={() => setMobileMenuOpen(false)}>Contact Sales</Link>
                     </Button>
-                    <Button className="w-full justify-center bg-blue-600 text-white hover:bg-blue-500 shadow-sm transition-colors" asChild>
+                    <Button className="w-full h-14 text-lg font-bold bg-blue-600 text-white rounded-xl shadow-lg shadow-blue-600/20" asChild>
                       <Link href="/book-demo" onClick={() => setMobileMenuOpen(false)}>Book a Demo</Link>
                     </Button>
                   </div>

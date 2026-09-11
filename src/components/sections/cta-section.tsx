@@ -11,7 +11,7 @@ export function CTASection() {
       <div className="absolute -top-24 -end-24 w-96 h-96 bg-brand-600 rounded-full blur-3xl opacity-50"></div>
       <div className="absolute -bottom-24 -start-24 w-96 h-96 bg-brand-800 rounded-full blur-3xl opacity-50"></div>
       
-      <div className="relative mx-auto max-w-7xl px-6 lg:px-8 text-center">
+      <div className="relative mx-auto max-w-[90rem] px-6 lg:px-8 text-center">
         <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl mb-6">
           Ready to Build an AI-Powered School?
         </h2>

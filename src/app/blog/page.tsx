@@ -75,7 +75,7 @@ export default function BlogPage() {
     <div className="bg-white min-h-screen">
       {/* Header */}
       <section className="pt-32 pb-16 bg-slate-50 border-b border-slate-200">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
+        <div className="mx-auto max-w-[90rem] px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-sm font-bold text-blue-600 uppercase tracking-widest mb-4">
             Insights & Resources
           </h1>
@@ -90,7 +90,7 @@ export default function BlogPage() {
 
       {/* Blog Grid */}
       <section className="py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-[90rem] px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
             {blogs.map((post) => (
               <article key={post.id} className="flex flex-col bg-white rounded-3xl border border-slate-200 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">

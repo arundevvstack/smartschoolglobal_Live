@@ -31,7 +31,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth" dir="ltr">
-      <body className={`${sans.variable} font-sans antialiased min-h-screen flex flex-col`}>
+      <body className={`${sans.variable} font-sans antialiased min-h-screen flex flex-col overflow-x-hidden`}>
         <Navbar />
         <main className="flex-grow pt-16">
           {children}

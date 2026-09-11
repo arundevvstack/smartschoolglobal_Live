@@ -15,7 +15,7 @@ export default function AnalyticsFeaturePage() {
     <div className="bg-white">
       {/* Hero */}
       <section className="pt-24 pb-16 bg-gray-50 border-b">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="mx-auto max-w-[90rem] px-6 lg:px-8">
           <div className="max-w-3xl">
             <div className="flex items-center gap-2 text-sm font-medium text-brand-600 mb-6">
               <BarChart3 className="h-5 w-5" />
@@ -33,7 +33,7 @@ export default function AnalyticsFeaturePage() {
 
       {/* Interactive Workflow */}
       <section className="py-24">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="mx-auto max-w-[90rem] px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             
             <div className="relative">
