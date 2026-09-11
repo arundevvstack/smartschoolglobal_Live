@@ -16,6 +16,12 @@ import { StatusBadge } from "@/components/ui/product/StatusBadge"
 // --------------------------------------------------------
 const FEATURES = [
   {
+    name: "AI Dashboard",
+    description: "Get real-time insights and predictive analytics across your entire institution.",
+    icon: BarChart3,
+    href: "/features/ai-dashboard"
+  },
+  {
     name: "Student Management",
     description: "Manage admissions, attendance, and student profiles from a single unified database.",
     icon: Users,
@@ -46,10 +52,16 @@ const FEATURES = [
     href: "/features/timetable"
   },
   {
-    name: "Parent Portal",
-    description: "Keep every parent informed with secure, real-time access to their child's progress.",
+    name: "Grade Book",
+    description: "Maintain comprehensive academic records, track progress, and generate detailed reports.",
+    icon: BookA,
+    href: "/features/grade-book"
+  },
+  {
+    name: "Parent/Teacher/Student App",
+    description: "Keep every stakeholder informed with secure, real-time access through dedicated mobile apps.",
     icon: Users,
-    href: "/features/parent-portal"
+    href: "/features/mobile-apps"
   },
   {
     name: "Analytics",
@@ -62,6 +74,30 @@ const FEATURES = [
     description: "Manage book inventories, track issued assets, and automate return reminders.",
     icon: Library,
     href: "/features/library"
+  },
+  {
+    name: "Stakehoder APP",
+    description: "A centralized application bridging communication between management, staff, and external partners.",
+    icon: Users,
+    href: "/features/stakeholder-app"
+  },
+  {
+    name: "HR",
+    description: "Manage staff records, payroll, leave requests, and performance evaluations seamlessly.",
+    icon: Users,
+    href: "/features/hr"
+  },
+  {
+    name: "Accounts",
+    description: "Comprehensive financial management, ledger tracking, and automated reporting.",
+    icon: Calculator,
+    href: "/features/accounts"
+  },
+  {
+    name: "More",
+    description: "Explore dozens of other modules designed to streamline every aspect of school operations.",
+    icon: Search,
+    href: "/features"
   }
 ]
 
@@ -204,7 +240,7 @@ export function FeatureGrid() {
                          </h3>
                       </div>
 
-                      {activeIdx === 0 && (
+                      {activeFeature.name === "Student Management" && (
                         <>
                           <div className="grid grid-cols-2 gap-3 sm:gap-4">
                             <MetricCard title="Total Students" value="Active" delay={0.1} />
@@ -217,7 +253,7 @@ export function FeatureGrid() {
                         </>
                       )}
 
-                      {activeIdx === 1 && (
+                      {activeFeature.name === "Attendance" && (
                         <>
                           <div className="grid grid-cols-2 gap-3 sm:gap-4">
                             <MetricCard title="Daily Roster" value="Tracking" delay={0.1} />
@@ -227,7 +263,7 @@ export function FeatureGrid() {
                         </>
                       )}
 
-                      {activeIdx === 2 && (
+                      {activeFeature.name === "Exams & Results" && (
                         <>
                           <div className="bg-white/5 rounded-xl border border-white/5 p-3 sm:p-4 mb-4">
                             <DataTableRow delay={0.1} columns={[<span key="1" className="text-xs sm:text-sm text-slate-300">Term 1 Marksheets</span>, <StatusBadge key="2" status="success" label="Published" />]} />
@@ -237,7 +273,7 @@ export function FeatureGrid() {
                         </>
                       )}
 
-                      {activeIdx === 3 && (
+                      {activeFeature.name === "Fee Collection" && (
                         <>
                           <div className="grid grid-cols-2 gap-3 sm:gap-4">
                             <MetricCard title="Payment Gateways" value="Online" delay={0.1} />
@@ -250,14 +286,14 @@ export function FeatureGrid() {
                         </>
                       )}
 
-                      {activeIdx === 4 && (
+                      {activeFeature.name === "Timetable" && (
                         <div className="flex-1 flex flex-col items-center justify-center min-h-[200px] sm:min-h-[250px] bg-white/5 rounded-xl border border-white/5 p-4 text-center">
                           <Calendar className="w-10 h-10 text-slate-500 mb-3" />
                           <span className="text-sm text-slate-400 font-medium">Master Schedule Connected</span>
                         </div>
                       )}
 
-                      {activeIdx === 5 && (
+                      {activeFeature.name === "Parent/Teacher/Student App" && (
                         <>
                           <div className="grid grid-cols-2 gap-3 sm:gap-4">
                             <MetricCard title="Portal Access" value="Live" delay={0.1} />
@@ -269,14 +305,14 @@ export function FeatureGrid() {
                         </>
                       )}
 
-                      {activeIdx === 6 && (
+                      {(activeFeature.name === "Analytics" || activeFeature.name === "AI Dashboard") && (
                         <div className="flex gap-4">
                            <div className="flex-1"><ChartPreview /></div>
                            <div className="flex-1 hidden sm:block"><ChartPreview /></div>
                         </div>
                       )}
 
-                      {activeIdx === 7 && (
+                      {activeFeature.name === "Library" && (
                         <>
                           <div className="grid grid-cols-2 gap-3 sm:gap-4">
                             <MetricCard title="Asset Catalog" value="Indexed" delay={0.1} />
@@ -286,6 +322,17 @@ export function FeatureGrid() {
                             <DataTableRow delay={0.3} columns={[<span key="1" className="text-xs sm:text-sm text-slate-300 font-mono">BK-4921</span>, <StatusBadge key="2" status="success" label="Available" />]} />
                           </div>
                         </>
+                      )}
+
+                      {/* Fallback for other items like HR, Accounts, etc. */}
+                      {![
+                        "Student Management", "Attendance", "Exams & Results", "Fee Collection", 
+                        "Timetable", "Parent/Teacher/Student App", "Analytics", "AI Dashboard", "Library"
+                      ].includes(activeFeature.name) && (
+                        <div className="flex-1 flex flex-col items-center justify-center min-h-[200px] sm:min-h-[250px] bg-white/5 rounded-xl border border-white/5 p-4 text-center">
+                          <activeFeature.icon className="w-10 h-10 text-slate-500 mb-3" />
+                          <span className="text-sm text-slate-400 font-medium">{activeFeature.name} Integrated Workspace</span>
+                        </div>
                       )}
 
                     </motion.div>

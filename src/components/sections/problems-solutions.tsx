@@ -233,16 +233,17 @@ export function ProblemsSolutions() {
   const handleDotClick = (idx: number) => {
     if (!containerRef.current) return
     const vh = window.innerHeight
+    const scrollableDistance = vh * 0.5 // 150vh total - 100vh viewport = 50vh scrollable
     // Jump to the exact start of the requested chapter segment
-    const targetScroll = containerRef.current.offsetTop + (vh * idx) + (vh * 0.1)
+    const targetScroll = containerRef.current.offsetTop + (scrollableDistance * (idx / CHAPTERS.length)) + (vh * 0.05)
     window.scrollTo({ top: targetScroll, behavior: 'smooth' })
   }
 
   return (
-    // 200vh container creates exactly 2 segments of scroll distance
-    <section ref={containerRef} className="relative h-[200vh] bg-[#0A192F]">
+    // 150vh container creates a snappier scroll distance
+    <section ref={containerRef} className="relative h-[150vh] bg-[#0A192F]">
       
-      {/* Sticky viewport locks content while scrolling down the 200vh container */}
+      {/* Sticky viewport locks content while scrolling down the 150vh container */}
       <div 
         className="sticky top-0 h-[100svh] overflow-hidden flex flex-col justify-center pt-20"
         onMouseMove={handleMouseMove}

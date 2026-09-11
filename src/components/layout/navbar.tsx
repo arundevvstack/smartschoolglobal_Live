@@ -3,6 +3,7 @@
 import * as React from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X, ChevronDown } from "lucide-react"
 
@@ -15,27 +16,17 @@ const navigation = [
     name: "Solutions", 
     href: "/solutions",
     dropdown: [
-      { name: "K-12 Schools", href: "/solutions/k-12", description: "Complete ERP for primary and secondary schools" },
-      { name: "Higher Education", href: "/solutions/higher-ed", description: "Manage colleges and universities seamlessly" },
-      { name: "Multi-Campus", href: "/solutions/multi-campus", description: "Centralised control for school groups" },
-      { name: "International", href: "/solutions/international", description: "Built for IB, IGCSE & Global Curricula" },
+      { name: "Independent Schools", href: "/solutions/independent", description: "Complete management for independent institutions" },
+      { name: "International Schools", href: "/solutions/international", description: "Built for IB, IGCSE & Global Curricula" },
+      { name: "Group of Schools", href: "/solutions/group", description: "Centralised control for multi-campus networks" },
     ]
   },
   { 
     name: "Features", 
-    href: "/features",
-    dropdown: [
-      { name: "Student Management", href: "/features/student-management" },
-      { name: "Attendance", href: "/features/attendance" },
-      { name: "Exams & Results", href: "/features/exams" },
-      { name: "Fee Collection", href: "/features/fees" },
-      { name: "Timetable", href: "/features/timetable" }, // Unverified "AI" removed
-      { name: "Parent Portal", href: "/features/parent-portal" },
-      { name: "Analytics", href: "/features/analytics" },
-      { name: "Library", href: "/features/library" },
-    ]
+    href: "/features"
   },
-  { name: "Pricing", href: "/pricing" },
+  { name: "Case Studies", href: "/case-studies" },
+  { name: "Blog", href: "/blog" },
   { name: "About", href: "/about" },
 ]
 
@@ -146,14 +137,11 @@ export function Navbar() {
           : "bg-white border-transparent"
       )}
     >
-      <nav className="mx-auto flex h-16 lg:h-20 max-w-7xl items-center justify-between px-4 lg:px-8" aria-label="Global">
+      <nav className="mx-auto flex h-28 lg:h-32 max-w-7xl items-center justify-between px-4 lg:px-8" aria-label="Global">
         <div className="flex lg:flex-1">
           <Link href="/" className="-m-1.5 p-1.5 flex items-center gap-2">
             <span className="sr-only">Smart School AI</span>
-            <div className="h-8 w-8 rounded-lg bg-blue-600 flex items-center justify-center shadow-sm">
-              <span className="text-white font-bold text-xl leading-none tracking-tighter">S</span>
-            </div>
-            <span className="font-bold text-xl tracking-tight text-blue-950">Smart School AI</span>
+            <Image src="/logo.png" alt="Smart School AI" width={300} height={96} className="h-24 w-auto object-contain" priority />
           </Link>
         </div>
         
@@ -288,10 +276,8 @@ export function Navbar() {
             >
               <div className="flex items-center justify-between border-b border-blue-900/10 pb-4">
                 <Link href="/" className="-m-1.5 p-1.5 flex items-center gap-2" onClick={() => setMobileMenuOpen(false)}>
-                  <div className="h-8 w-8 rounded-lg bg-blue-600 flex items-center justify-center shadow-sm">
-                    <span className="text-white font-bold text-xl leading-none">S</span>
-                  </div>
-                  <span className="font-bold text-xl text-blue-950">Smart School AI</span>
+                  <span className="sr-only">Smart School AI</span>
+                  <Image src="/logo.png" alt="Smart School AI" width={300} height={96} className="h-24 w-auto object-contain" priority />
                 </Link>
                 <button
                   type="button"

@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 
 export function Footer() {
   const year = new Date().getFullYear()
@@ -12,10 +13,8 @@ export function Footer() {
         <div className="xl:grid xl:grid-cols-3 xl:gap-8">
           <div className="space-y-8">
             <Link href="/" className="flex items-center gap-2">
-              <div className="h-8 w-8 rounded-lg bg-brand-900 flex items-center justify-center">
-                <span className="text-white font-bold text-xl leading-none">S</span>
-              </div>
-              <span className="font-bold text-xl text-brand-900">Smart School AI</span>
+              <span className="sr-only">Smart School AI</span>
+              <Image src="/logo.png" alt="Smart School AI" width={300} height={96} className="h-24 w-auto object-contain" />
             </Link>
             <p className="text-sm leading-6 text-muted-foreground max-w-xs">
               The Intelligent Operating System for Modern Schools. Automate administration, predict student outcomes, and transform your school with AI.
@@ -32,11 +31,10 @@ export function Footer() {
               <div>
                 <h3 className="text-sm font-semibold leading-6 text-foreground">Solutions</h3>
                 <ul role="list" className="mt-6 space-y-4">
-                  <li><Link href="/solutions/k-12" className="text-sm leading-6 text-muted-foreground hover:text-brand-900">K-12 Schools</Link></li>
-                  <li><Link href="/solutions/higher-ed" className="text-sm leading-6 text-muted-foreground hover:text-brand-900">Higher Education</Link></li>
-                  <li><Link href="/solutions/multi-campus" className="text-sm leading-6 text-muted-foreground hover:text-brand-900">Multi-Campus</Link></li>
-                  <li><Link href="/solutions/international" className="text-sm leading-6 text-muted-foreground hover:text-brand-900">International</Link></li>
-                </ul>
+                  <li><Link href="/solutions/independent" className="text-sm leading-6 text-muted-foreground hover:text-brand-900">Independent Schools</Link></li>
+                  <li><Link href="/solutions/international" className="text-sm leading-6 text-muted-foreground hover:text-brand-900">International Schools</Link></li>
+                  <li><Link href="/solutions/group" className="text-sm leading-6 text-muted-foreground hover:text-brand-900">Group of Schools</Link></li>
+              </ul>
               </div>
               <div className="mt-10 md:mt-0">
                 <h3 className="text-sm font-semibold leading-6 text-foreground">Key Features</h3>
@@ -54,7 +52,6 @@ export function Footer() {
                 <h3 className="text-sm font-semibold leading-6 text-foreground">Company</h3>
                 <ul role="list" className="mt-6 space-y-4">
                   <li><Link href="/about" className="text-sm leading-6 text-muted-foreground hover:text-brand-900">About Us</Link></li>
-                  <li><Link href="/pricing" className="text-sm leading-6 text-muted-foreground hover:text-brand-900">Pricing</Link></li>
                   <li><Link href="/resources/case-studies" className="text-sm leading-6 text-muted-foreground hover:text-brand-900">Case Studies</Link></li>
                   <li><Link href="/resources/buyers-guide" className="text-sm leading-6 text-muted-foreground hover:text-brand-900">Buyer's Guide</Link></li>
                 </ul>

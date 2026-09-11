@@ -2,139 +2,220 @@
 
 import * as React from "react"
 import { motion } from "framer-motion"
-import { CheckCircle2 } from "lucide-react"
+import { 
+  FileText, IndianRupee, Clock, Users, Globe2, Star, 
+  GraduationCap, UsersRound, TrendingUp, Zap, ShieldCheck, Heart, BarChart3,
+  Cloud, CheckCircle2, Globe, Layers, Sparkles, ArrowRight
+} from "lucide-react"
+import { Button } from "@/components/ui/button"
+import Link from "next/link"
 
-const supportingMetrics = [
+const metrics = [
   {
-    metric: "94%",
-    label: "Average fee collection rate achieved.",
-    subtext: "Automated tracking and smart reminders."
+    icon: FileText,
+    iconColor: "text-blue-500",
+    iconBg: "bg-blue-100",
+    value: "70%",
+    label: "Reduction in administrative work",
+    subtext: "More time for what matters — education."
   },
   {
-    metric: "3.5 hrs",
-    label: "Saved per teacher per week.",
-    subtext: "Time returned to focus on education."
+    icon: IndianRupee,
+    iconColor: "text-emerald-500",
+    iconBg: "bg-emerald-100",
+    value: "98%",
+    label: "Fee collection efficiency",
+    subtext: "Automated reminders and seamless payments."
   },
   {
-    metric: "20+",
-    label: "Countries worldwide.",
-    subtext: "A globally trusted operational standard."
+    icon: Clock,
+    iconColor: "text-purple-500",
+    iconBg: "bg-purple-100",
+    value: "5+ hrs",
+    label: "Saved per teacher per week",
+    subtext: "Less paperwork. More teaching."
+  },
+  {
+    icon: Users,
+    iconColor: "text-pink-500",
+    iconBg: "bg-pink-100",
+    value: "300+",
+    label: "Schools trust Smart School AI",
+    subtext: "From preschools to international schools."
+  },
+  {
+    icon: Globe2,
+    iconColor: "text-blue-500",
+    iconBg: "bg-blue-100",
+    value: "20+",
+    label: "Countries worldwide",
+    subtext: "Making education simpler, everywhere."
+  },
+  {
+    icon: Star,
+    iconColor: "text-yellow-500",
+    iconBg: "bg-yellow-100",
+    value: "4.8/5",
+    label: "Customer satisfaction",
+    subtext: "Loved by school leaders, teachers and parents."
   }
 ]
 
 export function TrustSection() {
   return (
-    <section className="py-16 lg:py-24 bg-white border-y overflow-hidden relative flex flex-col justify-center min-h-[100svh]">
-      
-      {/* Subtle Background Elements */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-50 rounded-full blur-[100px] pointer-events-none -z-10" />
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-slate-50 rounded-full blur-[80px] pointer-events-none -z-10" />
-
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full z-10">
+    <section className="py-16 lg:py-24 bg-white overflow-hidden relative">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
         
-        <div className="flex flex-col lg:grid lg:grid-cols-12 lg:gap-16 items-center">
+        {/* Top Half: Title & Grid */}
+        <div className="flex flex-col lg:grid lg:grid-cols-12 gap-12 lg:gap-8 items-start mb-16">
           
-          {/* LEFT: Primary Statement */}
-          <motion.div 
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="lg:col-span-5 text-center lg:text-start mb-16 lg:mb-0"
-          >
-            <h2 className="text-sm font-bold leading-7 text-blue-600 uppercase tracking-widest">
-              Proven Impact
+          {/* Left Column: Title Area */}
+          <div className="lg:col-span-5 flex flex-col justify-center pt-8">
+            <h2 className="text-xs font-bold leading-7 text-blue-600 uppercase tracking-[0.2em] mb-2">
+              Schools Run Smarter With AI
             </h2>
-            <p className="mt-4 text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl lg:text-5xl leading-tight">
-              Measurable Results Across 300+ Schools
-            </p>
-            <p className="mt-6 text-base sm:text-lg leading-8 text-slate-600">
-              Smart School AI doesn't just digitize your records—it actively improves your school's operational efficiency. Our platform replaces fragmented tools with a single, intelligent operating system.
+            <h3 className="text-4xl sm:text-5xl lg:text-[54px] font-black tracking-tight text-slate-900 leading-[1.1] mb-6">
+              Real Results <br />
+              <span className="text-blue-600">for Real Schools</span>
+            </h3>
+            <p className="text-lg text-slate-600 mb-8 leading-relaxed max-w-md">
+              Smart School AI helps schools save time, reduce manual work, improve communication, and create a better learning experience for every stakeholder.
             </p>
             
-            <div className="mt-10 flex flex-col sm:flex-row items-center lg:items-start gap-4">
-               <div className="flex -space-x-2">
-                 <div className="w-10 h-10 rounded-full bg-blue-100 border-2 border-white flex items-center justify-center text-blue-600 font-bold text-xs">UK</div>
-                 <div className="w-10 h-10 rounded-full bg-blue-200 border-2 border-white flex items-center justify-center text-blue-700 font-bold text-xs">AE</div>
-                 <div className="w-10 h-10 rounded-full bg-blue-300 border-2 border-white flex items-center justify-center text-blue-800 font-bold text-xs">SA</div>
-                 <div className="w-10 h-10 rounded-full bg-slate-100 border-2 border-white flex items-center justify-center text-slate-500 font-bold text-xs">+</div>
-               </div>
-               <div className="text-sm font-medium text-slate-600 mt-2 sm:mt-0">
-                 Trusted by <span className="font-bold text-slate-950">300+ institutions</span> globally.
-               </div>
+            {/* Tag Pills */}
+            <div className="flex flex-wrap gap-3">
+              <div className="flex items-center gap-2 bg-purple-50 rounded-lg px-3 py-2 border border-purple-100">
+                <div className="p-1.5 bg-purple-200 rounded-md">
+                  <GraduationCap className="w-4 h-4 text-purple-700" />
+                </div>
+                <span className="text-sm font-semibold text-slate-800 leading-tight">Students<br/>Engaged</span>
+              </div>
+              <div className="flex items-center gap-2 bg-emerald-50 rounded-lg px-3 py-2 border border-emerald-100">
+                <div className="p-1.5 bg-emerald-200 rounded-md">
+                  <UsersRound className="w-4 h-4 text-emerald-700" />
+                </div>
+                <span className="text-sm font-semibold text-slate-800 leading-tight">Teachers<br/>Empowered</span>
+              </div>
+              <div className="flex items-center gap-2 bg-blue-50 rounded-lg px-3 py-2 border border-blue-100">
+                <div className="p-1.5 bg-blue-200 rounded-md">
+                  <TrendingUp className="w-4 h-4 text-blue-700" />
+                </div>
+                <span className="text-sm font-semibold text-slate-800 leading-tight">Schools<br/>Future-Ready</span>
+              </div>
             </div>
-          </motion.div>
-
-          {/* RIGHT: Visual Evidence System */}
-          <div className="lg:col-span-7 w-full flex flex-col gap-6">
-            
-            {/* PRIMARY METRIC: 68% */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="bg-blue-600 rounded-3xl p-8 sm:p-12 shadow-xl shadow-blue-900/10 relative overflow-hidden"
-            >
-              <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-[60px] pointer-events-none" />
-              
-              <div className="relative z-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
-                <div>
-                  <div className="text-white/80 font-bold uppercase tracking-widest text-xs sm:text-sm mb-2">
-                    Verified Outcome
+          </div>
+          
+          {/* Right Column: Metrics Grid */}
+          <div className="lg:col-span-7 bg-white rounded-3xl p-6 sm:p-8 shadow-xl shadow-blue-900/5 border border-slate-100 w-full relative">
+            <h4 className="text-xs font-bold tracking-[0.15em] text-blue-600 uppercase mb-6">
+              Transformation in Numbers
+            </h4>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+              {metrics.map((item, idx) => (
+                <div key={idx} className="flex flex-col p-4 rounded-2xl hover:bg-slate-50 transition-colors">
+                  <div className="flex items-center gap-4 mb-3">
+                    <div className={`p-3 rounded-xl ${item.iconBg}`}>
+                      <item.icon className={`w-6 h-6 ${item.iconColor}`} />
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <span className="text-3xl font-black text-slate-900">{item.value}</span>
+                      <span className="text-emerald-500 font-bold text-xl">↑</span>
+                    </div>
                   </div>
-                  <div className="text-6xl sm:text-7xl lg:text-8xl font-black text-white tracking-tighter">
-                    68%
-                  </div>
-                </div>
-                
-                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 md:max-w-[200px] border border-white/20">
-                   <div className="flex items-start gap-3">
-                     <CheckCircle2 className="w-5 h-5 text-blue-200 shrink-0 mt-0.5" />
-                     <p className="text-sm font-semibold text-white">
-                       Reduction in admin workload across verified deployments.
-                     </p>
-                   </div>
-                </div>
-              </div>
-
-              {/* Minimal Progress/Impact Indicator */}
-              <div className="mt-10 w-full h-2 bg-black/20 rounded-full overflow-hidden">
-                 <motion.div 
-                   initial={{ width: 0 }}
-                   whileInView={{ width: '68%' }}
-                   viewport={{ once: true }}
-                   transition={{ duration: 1.5, ease: "easeOut", delay: 0.5 }}
-                   className="h-full bg-white rounded-full"
-                 />
-              </div>
-            </motion.div>
-
-            {/* SUPPORTING METRICS */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
-              {supportingMetrics.map((item, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.4 + (idx * 0.1) }}
-                  className="bg-slate-50 border border-slate-100 rounded-2xl p-6 hover:shadow-md hover:border-slate-200 transition-all duration-300 group"
-                >
-                  <div className="text-3xl font-black text-slate-950 mb-2 tracking-tight group-hover:text-blue-600 transition-colors">
-                    {item.metric}
-                  </div>
-                  <h3 className="text-sm font-bold text-slate-900 mb-1">{item.label}</h3>
+                  <h5 className="font-bold text-slate-900 text-sm mb-1 leading-snug">
+                    {item.label}
+                  </h5>
                   <p className="text-xs text-slate-500 leading-relaxed">
                     {item.subtext}
                   </p>
-                </motion.div>
+                </div>
               ))}
             </div>
-
           </div>
 
         </div>
+
+        {/* Middle Section: Testimonial & Benefits */}
+        <div className="bg-slate-50 rounded-3xl p-6 sm:p-10 border border-slate-200 mb-10 flex flex-col md:flex-row items-center gap-10 md:gap-16">
+          <div className="md:w-1/3 border-b md:border-b-0 md:border-r border-slate-200 pb-8 md:pb-0 md:pr-10 relative">
+             <p className="text-lg font-medium text-slate-700 italic leading-relaxed relative z-10">
+               "Smart School AI has transformed the way we operate. It's intuitive, powerful and a true partner in our growth journey."
+             </p>
+             <div className="mt-4 text-sm font-bold text-slate-900">
+               — School Principal, UAE
+             </div>
+          </div>
+          <div className="md:w-2/3 flex flex-wrap justify-between gap-6 w-full relative">
+             
+             <div className="flex flex-col items-center gap-3 w-[100px] text-center">
+               <div className="w-14 h-14 rounded-full bg-purple-500 flex items-center justify-center shadow-lg shadow-purple-500/20 text-white">
+                 <Zap className="w-6 h-6" />
+               </div>
+               <span className="text-xs font-bold text-slate-800">Faster Operations</span>
+             </div>
+             <div className="flex flex-col items-center gap-3 w-[100px] text-center">
+               <div className="w-14 h-14 rounded-full bg-emerald-500 flex items-center justify-center shadow-lg shadow-emerald-500/20 text-white">
+                 <ShieldCheck className="w-6 h-6" />
+               </div>
+               <span className="text-xs font-bold text-slate-800">Higher Transparency</span>
+             </div>
+             <div className="flex flex-col items-center gap-3 w-[100px] text-center">
+               <div className="w-14 h-14 rounded-full bg-pink-500 flex items-center justify-center shadow-lg shadow-pink-500/20 text-white">
+                 <Heart className="w-6 h-6" />
+               </div>
+               <span className="text-xs font-bold text-slate-800">Happier Parents</span>
+             </div>
+             <div className="flex flex-col items-center gap-3 w-[100px] text-center">
+               <div className="w-14 h-14 rounded-full bg-blue-500 flex items-center justify-center shadow-lg shadow-blue-500/20 text-white">
+                 <BarChart3 className="w-6 h-6" />
+               </div>
+               <span className="text-xs font-bold text-slate-800">Better Learning Outcomes</span>
+             </div>
+          </div>
+        </div>
+
+        {/* Bottom Section: Footer-style Trust Banner */}
+        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 pt-6 border-t border-slate-200">
+           <div className="flex flex-col gap-4 w-full">
+             <div className="text-[10px] font-bold text-slate-500 uppercase tracking-[0.15em]">
+               Trusted by schools around the world
+             </div>
+             <div className="flex flex-wrap items-center gap-x-8 gap-y-4">
+               <div className="flex items-center gap-2">
+                 <Cloud className="w-5 h-5 text-blue-500" />
+                 <span className="text-xs font-semibold text-slate-700 leading-tight">Google Cloud<br/>Ready</span>
+               </div>
+               <div className="flex items-center gap-2">
+                 <CheckCircle2 className="w-5 h-5 text-emerald-500" />
+                 <span className="text-xs font-semibold text-slate-700 leading-tight">Secure &<br/>Compliant</span>
+               </div>
+               <div className="flex items-center gap-2">
+                 <Globe className="w-5 h-5 text-blue-600" />
+                 <span className="text-xs font-semibold text-slate-700 leading-tight">Multi-Country<br/>Deployment</span>
+               </div>
+               <div className="flex items-center gap-2">
+                 <Layers className="w-5 h-5 text-slate-600" />
+                 <span className="text-xs font-semibold text-slate-700 leading-tight">Scalable for<br/>Any School Size</span>
+               </div>
+               <div className="flex items-center gap-2">
+                 <Sparkles className="w-5 h-5 text-purple-500" />
+                 <span className="text-xs font-semibold text-slate-700 leading-tight">AI-Powered<br/>for the Future</span>
+               </div>
+             </div>
+           </div>
+           
+           <div className="flex flex-col items-start lg:items-end w-full lg:w-auto shrink-0 mt-4 lg:mt-0 gap-2">
+             <Button className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white px-8 py-6 rounded-xl text-base font-bold shadow-lg shadow-blue-600/20" asChild>
+               <Link href="/book-demo">
+                 Request a Demo <ArrowRight className="ml-2 w-5 h-5" />
+               </Link>
+             </Button>
+             <span className="text-[10px] text-slate-500">
+               See how Smart School AI can work for your school.
+             </span>
+           </div>
+        </div>
+
       </div>
     </section>
   )

@@ -6,18 +6,27 @@ import { Search, Users, Calendar, BookOpen, CreditCard, Clock, MessageSquare, Ba
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 
-const featureCategories = ["All", "Core Administration", "Academics", "Finance", "Communication"]
+const featureCategories = ["All", "Core Administration", "Academics", "Finance", "Communication", "Analytics"]
 
 const features = [
+  {
+    id: "ai-dashboard",
+    name: "AI Dashboard",
+    category: "Analytics",
+    icon: BarChart3,
+    description: "Get real-time insights and predictive analytics across your entire institution.",
+    verifiedMetric: "Over 500+ daily active dashboards.",
+    related: ["student-management", "analytics"],
+    previewText: "Instantly see school performance metrics, predict enrollment trends, and monitor daily operations with advanced AI."
+  },
   {
     id: "student-management",
     name: "Student Management",
     category: "Core Administration",
     icon: Users,
     description: "Centralised profiles, enrolment workflows, and document management.",
-    href: "/features/student-management",
     verifiedMetric: "300+ institutions rely on this core.",
-    related: ["attendance", "exams", "analytics"],
+    related: ["attendance", "exams"],
     previewText: "Single source of truth for student records, disciplinary history, and health information.",
   },
   {
@@ -26,7 +35,6 @@ const features = [
     category: "Core Administration",
     icon: Calendar,
     description: "Automated daily logging, anomaly detection, and real-time syncing.",
-    href: "/features/attendance",
     verifiedMetric: "Auto-syncs records across all connected modules.",
     related: ["student-management", "parent-portal"],
     previewText: "Log attendance in seconds. AI instantly flags consecutive absences and notifies parents.",
@@ -37,9 +45,8 @@ const features = [
     category: "Academics",
     icon: BookOpen,
     description: "Custom grading rubrics, automated report card generation, and predictive tracking.",
-    href: "/features/exams",
     verifiedMetric: "3× earlier identification of at-risk students.",
-    related: ["analytics", "parent-portal"],
+    related: ["analytics", "parent-portal", "grade-book"],
     previewText: "Identify academic risks early. Native support for IB, IGCSE, and standard board curricula.",
   },
   {
@@ -48,9 +55,8 @@ const features = [
     category: "Finance",
     icon: CreditCard,
     description: "Automated invoicing, predictive collection targets, and multi-currency support.",
-    href: "/features/fees",
     verifiedMetric: "94% average fee collection rate achieved.",
-    related: ["student-management", "analytics", "parent-portal"],
+    related: ["student-management", "accounts"],
     previewText: "Predict payment trends and automatically send personalized reminders via SMS or Email.",
   },
   {
@@ -59,18 +65,26 @@ const features = [
     category: "Academics",
     icon: Clock,
     description: "AI-driven schedule generation that balances staff workload and room availability.",
-    href: "/features/timetable",
     verifiedMetric: "Saves 3.5 hours per teacher per week.",
-    related: ["student-management", "attendance"],
+    related: ["hr"],
     previewText: "Generate conflict-free schedules in minutes instead of weeks.",
   },
   {
+    id: "grade-book",
+    name: "Grade Book",
+    category: "Academics",
+    icon: BookOpen,
+    description: "Maintain comprehensive academic records, track progress, and generate detailed reports.",
+    verifiedMetric: "Used by 10,000+ teachers daily.",
+    related: ["exams", "student-management"],
+    previewText: "A digital grade book designed specifically for modern educators to track continuous assessments."
+  },
+  {
     id: "parent-portal",
-    name: "Parent Portal",
+    name: "Parent/Teacher/Student App",
     category: "Communication",
     icon: MessageSquare,
     description: "Multilingual automated updates, direct messaging, and secure access to grades.",
-    href: "/features/parent-portal",
     verifiedMetric: "60% improvement in parent engagement.",
     related: ["attendance", "fees", "exams"],
     previewText: "Engage families in 15+ languages. Parents see real-time updates on attendance and fees.",
@@ -78,12 +92,11 @@ const features = [
   {
     id: "analytics",
     name: "School Analytics",
-    category: "Core Administration",
+    category: "Analytics",
     icon: BarChart3,
     description: "Real-time KPI dashboards, resource optimisation, and multi-campus benchmarking.",
-    href: "/features/analytics",
     verifiedMetric: "68% reduction in admin workload.",
-    related: ["exams", "fees", "attendance"],
+    related: ["fees", "attendance", "ai-dashboard"],
     previewText: "Principals and management get a live view of operational pulse and financial health.",
   },
   {
@@ -92,10 +105,39 @@ const features = [
     category: "Core Administration",
     icon: Library,
     description: "Digital cataloging, automated late-fee tracking, and reading habit analytics.",
-    href: "/features/library",
     verifiedMetric: "Fully integrated with student ID profiles.",
     related: ["student-management"],
     previewText: "Modernize your library with barcode scanning and automated overdue notices.",
+  },
+  {
+    id: "stakeholder-app",
+    name: "Stakeholder APP",
+    category: "Communication",
+    icon: Users,
+    description: "A centralized application bridging communication between management, staff, and external partners.",
+    verifiedMetric: "100% centralized communication log.",
+    related: ["parent-portal"],
+    previewText: "Ensure no message is lost. Connect stakeholders in a secure, audited environment."
+  },
+  {
+    id: "hr",
+    name: "HR Management",
+    category: "Core Administration",
+    icon: Users,
+    description: "Manage staff records, payroll, leave requests, and performance evaluations seamlessly.",
+    verifiedMetric: "Streamlines payroll for 5,000+ staff globally.",
+    related: ["accounts", "timetable"],
+    previewText: "End-to-end human resource management tailored for educational institutions."
+  },
+  {
+    id: "accounts",
+    name: "Financial Accounts",
+    category: "Finance",
+    icon: CreditCard,
+    description: "Comprehensive financial management, ledger tracking, and automated reporting.",
+    verifiedMetric: "Zero-reconciliation error rate achieved.",
+    related: ["fees", "hr"],
+    previewText: "Maintain precise financial health with automated ledgers, expense tracking, and custom reporting."
   }
 ]
 
@@ -232,10 +274,10 @@ export function FeatureExplorer() {
         
         <div className="p-6 bg-background border-t border-border mt-auto">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="text-sm text-muted-foreground">Explore the full capabilities of the {selectedFeature.name} module.</p>
-            <Button asChild>
-              <Link href={selectedFeature.href}>
-                View Feature Detail <ArrowRight className="ms-2 h-4 w-4" />
+            <p className="text-sm text-muted-foreground">Ready to see {selectedFeature.name} in action?</p>
+            <Button asChild className="bg-blue-600 hover:bg-blue-700 text-white">
+              <Link href="/book-demo">
+                Book a Demo <ArrowRight className="ms-2 h-4 w-4" />
               </Link>
             </Button>
           </div>

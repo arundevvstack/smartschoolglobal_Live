@@ -11,31 +11,13 @@ import { StatusBadge } from "@/components/ui/product/StatusBadge"
 
 const solutions = [
   {
-    id: "k-12",
-    name: "K-12 Schools",
-    description: "Manage admissions, attendance, fees, exams, and parent communication from one unified platform. Built for primary and secondary schools.",
+    id: "independent",
+    name: "Independent Schools",
+    description: "Manage admissions, attendance, fees, exams, and parent communication from one unified platform. Built for independent institutions.",
     icon: Building2,
-    href: "/solutions/k-12",
+    href: "/solutions/independent",
     metricValue: "Optimised",
     metricLabel: "System Readiness"
-  },
-  {
-    id: "higher-ed",
-    name: "Higher Education",
-    description: "Manage students, faculty, finance and exams across departments from one unified platform. Eliminate silos in colleges.",
-    icon: GraduationCap,
-    href: "/solutions/higher-ed",
-    metricValue: "Departmental",
-    metricLabel: "Cross-sync Active"
-  },
-  {
-    id: "multi-campus",
-    name: "Multi-Campus",
-    description: "Centralised ERP for school groups with 5 to 500+ campuses. Gain real-time visibility and enforce consistent policies.",
-    icon: Network,
-    href: "/solutions/multi-campus",
-    metricValue: "Multi-Node",
-    metricLabel: "Global Visibility"
   },
   {
     id: "international",
@@ -46,6 +28,15 @@ const solutions = [
     metricValue: "Curriculum",
     metricLabel: "Native Support"
   },
+  {
+    id: "group",
+    name: "Group of Schools",
+    description: "Centralised ERP for school groups with 5 to 500+ campuses. Gain real-time visibility and enforce consistent policies.",
+    icon: Network,
+    href: "/solutions/group",
+    metricValue: "Multi-Node",
+    metricLabel: "Global Visibility"
+  }
 ]
 
 export function SolutionsTabs() {

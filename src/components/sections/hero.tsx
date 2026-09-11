@@ -443,15 +443,16 @@ export function Hero() {
     if (!containerRef.current) return
     // Scroll window to specific chapter
     const vh = window.innerHeight
-    const targetScroll = containerRef.current.offsetTop + (vh * idx)
+    const scrollableDistance = vh * 1.5 // 250vh total - 100vh viewport = 150vh scrollable
+    const targetScroll = containerRef.current.offsetTop + (scrollableDistance * (idx / CHAPTERS.length)) + (vh * 0.05)
     window.scrollTo({ top: targetScroll, behavior: 'smooth' })
   }
 
   return (
-    // 500vh container creates the scroll distance
-    <div ref={containerRef} className="relative h-[500vh] bg-[#0A192F]">
+    // 250vh container creates a snappier scroll distance
+    <div ref={containerRef} className="relative h-[250vh] bg-[#0A192F]">
       
-      {/* Sticky viewport locks content while scrolling down the 500vh container */}
+      {/* Sticky viewport locks content while scrolling down the 250vh container */}
       <div 
         className="sticky top-0 h-[100svh] overflow-hidden flex flex-col justify-center pt-16"
         onMouseMove={handleMouseMove}
